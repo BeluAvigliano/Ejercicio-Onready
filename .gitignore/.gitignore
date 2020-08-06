@@ -1,0 +1,66 @@
+var vehiculos = [];
+
+var banderadelmasbarato = true;
+
+function vehiculo (marca, modelo, puerta, cilindrada, precio) {
+    this.marca = marca;
+    this.modelo = modelo;
+    this.puertas = puerta;
+    this.cilindrada = cilindrada;
+    this.precio = precio;
+};
+
+var veh_mas_caro = new vehiculo();
+var veh_mas_barato = new vehiculo();
+var veh_letra = new vehiculo();
+
+vehiculos[0] = new vehiculo("Peugeot", "206", "4", "", 200000);
+vehiculos[1] = new vehiculo("Honda", "titan", "", "125c", 60000);
+vehiculos[2] = new vehiculo("Peugeot", "208", "5", "", 250000);
+vehiculos[3] = new vehiculo("Yamaha", "YBR", "", "160c", 80500.50);
+
+for (var i = 0; i < vehiculos.length; i++){
+
+    if(banderadelmasbarato==true)
+    {
+        veh_mas_barato = vehiculos[i];
+
+        veh_mas_caro = vehiculos[i];        
+
+        banderadelmasbarato=false;
+
+    };
+
+    if ( vehiculos[i].precio > veh_mas_caro.precio ){
+        veh_mas_caro = vehiculos[i];        
+    };
+
+    if( vehiculos[i].precio < veh_mas_barato.precio){
+        veh_mas_barato = vehiculos[i];
+    };
+
+    if ( vehiculos[i].modelo.includes("Y") ) {
+        veh_letra = vehiculos[i];
+    }
+    
+};
+
+console.log("Vehiculo mas caro: " + veh_mas_caro.marca + " " + veh_mas_caro.modelo);
+console.log("Vehiculo mas barato: "+ veh_mas_barato.marca + " "+  veh_mas_barato.modelo);
+console.log("Vehiculo que contiene en el modelo la letra 'Y': " +  veh_letra.marca + " " +  veh_letra.modelo + " " + veh_letra.precio );
+
+for(var k = 1; k<vehiculos.length; k++) {
+    for(var f = 0; f<(vehiculos.length-k); f++) 
+    {
+        if (vehiculos[f].precio < vehiculos[f+1].precio ) 
+        {            
+            aux=vehiculos[f+1];
+            vehiculos[f+1]=vehiculos[f];
+            vehiculos[f]=aux;
+        }
+    }
+}
+
+for (i = 0; i < vehiculos.length; i++){
+    console.log(vehiculos[i].marca + " " + vehiculos[i].modelo);
+};
